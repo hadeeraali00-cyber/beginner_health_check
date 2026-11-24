@@ -79,12 +79,12 @@ st.markdown(
 left_col, right_col = st.columns([1, 1.35], gap="large")
 
 with left_col:
-    with st.container(border=True):
-st.subheader("Your Measurements")
-weight=st.number_input("weight(kg)", min_value=30.0,max_value=250.0,value=70.0)
-height_cm=st.number_input("height(cm)",min_value=100.0,max_value=220.0,value=170.0)
-systolic=st.number_input("Top blood pressure number(systolic)",min_value=70,max_value=250,value=120)
-diastolic=st.number_input("Bottom blood pressure(diastolic)",min_value=40,max_value=150,value=80)
+   with st.container(border=True):
+      st.subheader("Your Measurements")
+      weight=st.number_input("weight(kg)", min_value=30.0,max_value=250.0,value=70.0)
+      height_cm=st.number_input("height(cm)",min_value=100.0,max_value=220.0,value=170.0)
+      systolic=st.number_input("Top blood pressure number(systolic)",min_value=70,max_value=250,value=120)
+      diastolic=st.number_input("Bottom blood pressure(diastolic)",min_value=40,max_value=150,value=80)
 
 height_m=height_cm/100
 bmi=weight/ (height_m*height_m)
@@ -93,7 +93,7 @@ bmi_rounded=round(bmi,1)
 if  bmi < 18.5:
     bmi_group="underweight"
     bmi_value=
-elif bmi < 25:
+elif bmi < 25.0:
      bmi_group="normal weight"
     bmi_value=
 elif bmi < 30.0:
