@@ -1,3 +1,82 @@
+import altair as alt
+import pandas as pd
+import streamlit as st
+
+st.set_page_config(
+    page_title="Beginner Health Check",
+    page_icon="🩺",
+    layout="wide",
+)
+
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #F1F5F9;
+    }
+    .block-container {
+        max-width: 1050px;
+        padding-top: 1.5rem;
+        padding-bottom: 2.5rem;
+    }
+    .health-header {
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-top: 4px solid #2563EB;
+        border-radius: 14px;
+        padding: 18px 24px;
+        margin-bottom: 18px;
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+    .health-title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #0F172A;
+        margin: 0;
+    }
+    .health-sub {
+        color: #64748B;
+        font-size: 0.92rem;
+        margin-top: 4px;
+    }
+    .kpi-card {
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 14px;
+        padding: 16px 18px;
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+        margin-bottom: 12px;
+    }
+    .kpi-blue { border-left: 4px solid #2563EB; }
+    .kpi-teal { border-left: 4px solid #14B8A6; }
+    .kpi-label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #64748B;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .kpi-value {
+        font-size: 1.65rem;
+        font-weight: 800;
+        color: #0F172A;
+        margin: 4px 0;
+    }
+    .kpi-tag {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #2563EB;
+    }
+    </style>
+
+    <div class="health-header">
+        <div class="health-title">Beginner Health Check</div>
+        <div class="health-sub">Learning project — enter your weight, height, and blood pressure for a quick snapshot</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 # beginner health check: blood pressure and BMI
 # MY OWN HEALTH MINI PROJECT:for eduaction only
 # run with: pip install streamlit then streamlit run python_beginner_health_check.py
