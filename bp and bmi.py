@@ -74,44 +74,44 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 left_col, right_col = st.columns([1, 1.35], gap="large")
 
 with left_col:
-    with st.container(border=True):
-        st.subheader("Your Measurements")
-        weight = st.number_input("Weight (kg)", min_value=30.0, max_value=250.0, value=70.0)[span_0](start_span)[span_0](end_span)
-        height_cm = st.number_input("Height (cm)", min_value=100.0, max_value=230.0, value=170.0)[span_1](start_span)[span_1](end_span)
-        systolic = st.number_input("Top blood pressure number (systolic)", min_value=70, max_value=250, value=120)[span_2](start_span)[span_2](end_span)
-        diastolic = st.number_input("Bottom blood pressure number (diastolic)", min_value=40, max_value=150, value=80)[span_3](start_span)[span_3](end_span)
+   with st.container(border=True):
+      st.subheader("Your Measurements")
+      weight=st.number_input("weight(kg)", min_value=30.0,max_value=250.0,value=70.0)
+      height_cm=st.number_input("height(cm)",min_value=100.0,max_value=220.0,value=170.0)
+      systolic=st.number_input("Top blood pressure number(systolic)",min_value=70,max_value=250,value=120)
+      diastolic=st.number_input("Bottom blood pressure(diastolic)",min_value=40,max_value=150,value=80)
 
-height_m = height_cm / 100.0[span_4](start_span)[span_4](end_span)
-bmi = weight / (height_m * height_m)[span_5](start_span)[span_5](end_span)
-bmi_rounded = round(bmi, 1)
+height_m=height_cm/100
+bmi=weight/ (height_m*height_m)
+bmi_rounded=round(bmi,1)
 
-if bmi < 18.5:[span_6](start_span)[span_6](end_span)
-    bmi_group = "underweight[span_7](start_span)"[span_7](end_span)
-elif bmi < 25.0:[span_8](start_span)[span_8](end_span)
-    bmi_group = "normal weight[span_9](start_span)"[span_9](end_span)
-elif bmi < 30.0:[span_10](start_span)[span_10](end_span)
-    bmi_group = "overweight[span_11](start_span)"[span_11](end_span)
-else:[span_12](start_span)[span_12](end_span)
-    bmi_group = "obesity range[span_13](start_span)"[span_13](end_span)
-
-if systolic < 120 and diastolic < 80:
-    bp_group = "normal"
-elif systolic < 130 and diastolic < 80:
-    bp_group = "elevated"
-elif systolic < 140 or diastolic < 90:
-    bp_group = "stage 1 hypertension[span_14](start_span)[span_15](start_span)"[span_14](end_span)[span_15](end_span)
+if  bmi < 18.5:
+    bmi_group="underweight"
+elif bmi < 25.0:
+     bmi_group="normal weight"
+elif bmi < 30.0:
+     bmi_group="overweight"
 else:
-    bp_group = "stage 2+ hypertension"
+    bmi_group="obesity range"
+    
+if systolic > 180 or diastolic > 120:
+    bp_group = "very high: seek immediate medical advice"
+elif systolic >= 140 or diastolic >= 90:
+    bp_group = "stage 2 hypertension"
+elif systolic >= 130 or diastolic >= 80:
+    bp_group = "stage 1 hypertension"
+elif systolic >= 120 and diastolic < 80:
+    bp_group = "elevated"
+else:
+    bp_group = "normal"
 
 with right_col:
-    st.subheader("Your Results")[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span)
-
-    m1, m2 = st.columns(2)
-    with m1:
+    st.subheader("Your Results")
+m1, m2 = st.columns(2)
+with m1:
         st.markdown(
             f"""
             <div class="kpi-card kpi-blue">
@@ -122,7 +122,7 @@ with right_col:
             """,
             unsafe_allow_html=True,
         )
-    with m2:
+with m2:
         st.markdown(
             f"""
             <div class="kpi-card kpi-teal">
@@ -134,11 +134,9 @@ with right_col:
             unsafe_allow_html=True,
         )
 
-    st.caption("Educational learning project only — not medical advice or a clinical diagnosis.")[span_18](start_span)[span_18](end_span)[span_19](start_span)[span_19](end_span)
+st.caption("Educational learning project only — not medical advice or a clinical diagnosis.")
 
 
-
-
-
+    
 
 
