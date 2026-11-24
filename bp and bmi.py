@@ -1,5 +1,3 @@
-import altair as alt
-import pandas as pd
 import streamlit as st
 
 st.set_page_config(
@@ -99,17 +97,14 @@ elif bmi < 30.0:[span_10](start_span)[span_10](end_span)
 else:[span_12](start_span)[span_12](end_span)
     bmi_group="obesity range"[span_13](start_span)[span_13](end_span)
 
-# 3. sort blood pressure into groups (2025 ACC/AHA)
-if systolic > 180 or diastolic > 120:
-   bp_group="very high: seek immediate medical advice"
-elif systolic >= 130-139 or diastolic >= 80-89:
-    bp_group="stage 1 hypertension"[span_14](start_span)[span_15](start_span)"[span_14](end_span)[span_15](end_span)
-elif systolic >= 140 or diastolic >= 90:
-    bp_group="stage 2 hypertension"
-elif systolic >=120-130 or diastolic >=80-90:
-    bp_group="elevated"
+if systolic < 120 and diastolic < 80:
+    bp_group = "normal"
+elif systolic < 130 and diastolic < 80:
+    bp_group = "elevated"
+elif systolic < 140 or diastolic < 90:
+    bp_group = "stage 1 hypertension[span_14](start_span)[span_15](start_span)"[span_14](end_span)[span_15](end_span)
 else:
-    bp_group="normal"
+    bp_group = "stage 2+ hypertension"
 
 with right_col:
     st.subheader("Your Results")[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span)
