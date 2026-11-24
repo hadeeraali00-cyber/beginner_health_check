@@ -103,8 +103,6 @@ elif systolic >= 140 or diastolic >= 90:
     bp_group = "stage 2 hypertension"
 elif systolic >= 130 or diastolic >= 80:
     bp_group = "stage 1 hypertension"
-elif systolic >= 120 and diastolic >= 80:
-    bp_group = "elevated"
 else:
     bp_group = "normal"
 
