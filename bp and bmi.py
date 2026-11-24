@@ -99,10 +99,12 @@ else:
     
 if systolic > 180 or diastolic > 120:
     bp_group = "very high: seek immediate medical advice"
-elif systolic >= 140 or diastolic >= 90:
+elif systolic >= 140 or diastolic >= 100:
     bp_group = "stage 2 hypertension"
-elif systolic >= 130 or diastolic >= 80:
+elif systolic >= 130 or diastolic >= 90:
     bp_group = "stage 1 hypertension"
+elif(120 <= systolic <130) or (80 <+ diastolic < 90):
+    bp_group="elevated"
 else:
     bp_group = "normal"
 
