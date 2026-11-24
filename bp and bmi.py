@@ -109,24 +109,24 @@ else:
 with right_col:
     st.subheader("Your Results")
 m1, m2 = st.columns(2)
-    with m1:
-        st.markdown(
-            f"""
-            <div class="kpi-card kpi-blue">
-                <div class="kpi-label">BMI</div>
-                <div class="kpi-value">{bmi_rounded}</div>
-                <div class="kpi-tag">{bmi_group}</div>
+with m1:
+    st.markdown(
+         f"""
+         <div class="kpi-card kpi-blue">
+              <div class="kpi-label">BMI</div>
+              <div class="kpi-value">{bmi_rounded}</div>
+              <div class="kpi-tag">{bmi_group}</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
-    with m2:
-        st.markdown(
-            f"""
-            <div class="kpi-card kpi-teal">
-                <div class="kpi-label">Blood Pressure</div>
-                <div class="kpi-value">{systolic}/{diastolic}</div>
-                <div class="kpi-tag">{bp_group}</div>
+ with m2:
+     st.markdown(
+         f"""
+         <div class="kpi-card kpi-teal">
+              <div class="kpi-label">Blood Pressure</div>
+              <div class="kpi-value">{systolic}/{diastolic}</div>
+              <div class="kpi-tag">{bp_group}</div>
             </div>
             """,
             unsafe_allow_html=True,
