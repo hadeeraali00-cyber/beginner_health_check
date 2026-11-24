@@ -76,51 +76,131 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+left_col, right_col = st.columns([1, 1.35], gap="large")
 
-# beginner health check: blood pressure and BMI
-# MY OWN HEALTH MINI PROJECT:for eduaction only
-# run with: pip install streamlit then streamlit run python_beginner_health_check.py
-
-import streamlit as st
-
-st.title("beginner health check")
-st.write("this is a learning project")
-
-# 1. get inputs from users
+with left_col:
+    with st.container(border=True):
+st.subheader("Your Measurements")
 weight=st.number_input("weight(kg)", min_value=30.0,max_value=250.0,value=70.0)
 height_cm=st.number_input("height(cm)",min_value=100.0,max_value=220.0,value=170.0)
 systolic=st.number_input("Top blood pressure number(systolic)",min_value=70,max_value=250,value=120)
 diastolic=st.number_input("Bottom blood pressure(diastolic)",min_value=40,max_value=150,value=80)
 
-# 2. get BMI weight(kg) divided by height(m) squared
 height_m=height_cm/100
 bmi=weight/ (height_m*height_m)
+bmi_rounded=round(bmi,1)
 
 if  bmi < 18.5:
     bmi_group="underweight"
+    bmi_value=
 elif bmi < 25:
      bmi_group="normal weight"
+    bmi_value=
 elif bmi < 30.0:
      bmi_group="overweight"
+     bmi_value=
 else:
     bmi_group="obesity range"
+    bmi_value=
 
 # 3. sort blood pressure into groups (2020 ACC/AHA)
 if systolic > 180 or diastolic > 120:
    bp_group="very high: seek immediate medical advice"
+   bp_val=
 elif systolic >= 130-139 or diastolic >= 80-89:
     bp_group="stage 1 hypertension"
+        bp_val=
 elif systolic >= 140 or diastolic >= 90:
     bp_group="stage 2 hypertension"
+        bp_val=
 elif systolic >=120-130 or diastolic >=80-90:
     bp_group="elevated"
+        bp_val=
 else:
     bp_group="normal"
+        bp_val=
+readiness_pct = int(round((bmi_val + bp_val) / 2))
 
-# 3. show the results
-st.subheader("your results")
-st.write(f"bmi:{bmi:.1f} ({bmi_group})")
-st.write(f"blood pressure:{systolic}/{diastolic} ({bp_group})")
+with right_col:
+    st.subheader("Your Results")
+
+    m1, m2 = st.columns(2)
+    with m1:
+        st.markdown(
+            f"""
+            <div class="kpi-card kpi-blue">
+                <div class="kpi-label">BMI</div>
+                <div class="kpi-value">{bmi_rounded}</div>
+                <div class="kpi-tag">{bmi_group}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with m2:
+        st.markdown(
+            f"""
+            <div class="kpi-card kpi-teal">
+                <div class="kpi-label">Blood Pressure</div>
+                <div class="kpi-value">{systolic}/{diastolic}</div>
+                <div class="kpi-tag">{bp_group}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    c_chart1, c_chart2 = st.columns(2)
+
+    with c_chart1:
+        with st.container(border=True):
+            st.caption("Snapshot Ring")
+            donut_df = pd.DataFrame({
+                "Category": ["Match", "Remaining"],
+                "Value": [readiness_pct, 100 - readiness_pct],
+            })
+            donut = (
+                alt.Chart(donut_df)
+                .mark_arc(innerRadius=42, outerRadius=62)
+                .encode(
+                    theta=alt.Theta("Value:Q"),
+                    color=alt.Color(
+                        "Category:N",
+                        scale=alt.Scale(domain=["Match", "Remaining"], range=["#2563EB", "#E2E8F0"]),
+                        legend=None,
+                    ),
+                    tooltip=["Category", "Value"],
+                )
+                .properties(height=150)
+            )
+            st.altair_chart(donut, use_container_width=True)
+            st.markdown(f"**{readiness_pct}%** target alignment")
+
+    with c_chart2:
+        with st.container(border=True):
+            st.caption("Sample Trend Sparkline")
+            trend_df = pd.DataFrame({
+                "Check": [1, 2, 3, 4, 5],
+                "BMI": [
+                    max(10.0, round(bmi_rounded - 1.2, 1)),
+                    max(10.0, round(bmi_rounded - 0.7, 1)),
+                    max(10.0, round(bmi_rounded - 0.9, 1)),
+                    max(10.0, round(bmi_rounded - 0.3, 1)),
+                    bmi_rounded,
+                ],
+            })
+            line = (
+                alt.Chart(trend_df)
+                .mark_line(color="#14B8A6", strokeWidth=3, point=True)
+                .encode(
+                    x=alt.X("Check:O", axis=alt.Axis(title="Check #", labelAngle=0)),
+                    y=alt.Y("BMI:Q", scale=alt.Scale(zero=False), axis=alt.Axis(title="BMI")),
+                    tooltip=["Check", "BMI"],
+                )
+                .properties(height=150)
+            )
+            st.altair_chart(line, use_container_width=True)
+
+    st.caption("Educational learning project only — not medical advice or a clinical diagnosis.")
+
 st.caption("One reading is not enough. A doctor decides what your number means.")
 
 
